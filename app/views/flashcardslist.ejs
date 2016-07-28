@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%=title%>
+  </title>
+</head>
+<body>
+
+  <% for(var i=0; i < flashcards.length; i++) {%>
+
+    <div style="border: 1px solid black">
+      <ul style="list-style-type:none">
+      <li><h3>Word: <%= flashcards[i].word %></h3></li>
+      <li>Defenition: <%= flashcards[i].defenition %></li>
+      <li>Bin: <%= flashcards[i].bin %></li>
+      <li>Number of times answered incorrect: <%= flashcards[i].wrong %></li>
+      <li>Last Seen: <%= new Date().getTime()/1000-new Date(flashcards[i].lastSeen).getTime()/1000%> seconds ago</li>
+      </ul>
+    </div>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<!--  xmlns:ng="http://angularjs.org"> -->
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <title><%= title %></title>
+<script>
+  var flashcard;
+  $(document).ready(function(){
+    $(".GotIt").click(function(){
+      $.post("/nextGotIt",{ "gotIt": "true" },function(data, status){
+        $("#word").html(data.word);
+        $("#defenition").html(data.defenition);
+        $("#defenition").hide();
+      }, 'json');
+    });
+  });
+  $(document).ready(function(){
+    $(".NotGotIt").click(function(){
+      $.post("/nextNotGotIt", { "gotIt": "false" }, function(data, status){
+        $("#word").html(data.word);
+        $("#defenition").html(data.defenition);
+        $("#defenition").hide();
+      }, 'json');
+    });
+  });
+  $(document).ready(function(){
+    $(".ShowDef").click(function(){
+      $("#defenition").show();
+    });
+  });
+  $(document).ready(function(){
+   // $(".Start").click(function(){
+      $.get("/next", function(data, status){
+        flashcard = data.flashcard;
+        $("#word").html(data.word);
+        $("#defenition").html(data.defenition);
+        $("#defenition").hide();
+      });
+   // });
+  });
+</script>
+</head>
+<body>
+
+  <% if ( user ) { %>
+    <a href="/signout">Sign out</a>
+    <a href="/flashcards">Flashcards List</a>
+    <a href="/flashcard">Create Flashcard</a>
+    <div id="word"></div>
+    <div id="defenition"></div>
+    <button class="GotIt">I got it!</button>
+    <button class="NotGotIt">I did not get it.</button>
+    <button class="ShowDef">Show Defenition.</button>
+ <!--    <button class="Start">Start</button> -->
+  <%} else { %>
+    <a href="/signup">Signup</a>
+    <a href="/signin">Signin</a>
+  <% } %> 
+
+  <section ng-view></section>
+
+  <script type="text/javascript">
+   	window.user = <%- user || 'null' %>;
+  </script>
+
+
+</body>
