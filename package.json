@@ -1,5 +1,5 @@
 {
-  "name": "bargain_eats",
+  "name": "flashcard_app",
   "version": "0.0.3",
   "dependencies": {
     "express": "^4.13.4",
